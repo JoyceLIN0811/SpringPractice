@@ -1,0 +1,118 @@
+*,
+button,
+input,
+select {
+    box-sizing: inherit;
+}
+
+html {
+    background: #e5eaee;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+.shop {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+}
+
+.item {
+    background: white;
+    box-shadow: 0 2px 5px #c5cacc;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 auto;
+            flex: 0 auto;
+    margin: 1em;
+    text-align: center;
+    width: 15em;
+}
+
+.item__name {
+    text-transform: capitalize;
+}
+
+.item__money-container,
+.item__count-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.item__price,
+.item__cost,
+.item__remove,
+.item__count,
+.item__add {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    height: 2.5rem;
+    line-height: 1rem;
+    padding: 0.75rem;
+}
+
+.item__price,
+.item__cost {
+    position: relative;
+}
+
+/* add a name just above the field */
+.item__price::before,
+.item__cost::before {
+    display: block;
+    font-size: 0.8em;
+    position: absolute;
+    text-align: center;
+    top: -6px;
+    right: 0;
+    left: 0;
+}
+
+.item__price::before {
+    content: "price";
+}
+
+.item__cost {
+    color: #59b;
+}
+
+.item__cost::before {
+    content: "cost";
+}
+
+.item__remove,
+.item__add {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.25em;
+    margin: 0;
+    outline: none;
+}
+
+.item__remove {
+    background: #f77;
+}
+
+.item__count {
+    background: #ed6;
+}
+
+.item__add {
+    background: #6d6;
+}

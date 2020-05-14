@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<context:annotation-config/>
+	<mvc:annotation-driven/>
+	<context:component-scan base-package="tw.pet"/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!-- 此為圖片的虛構路徑， 位置放在/resources/petImage/ 底下  如果要插入圖片請用/images/** -->
+	<mvc:resources location="/WEB-INF/resources/petImage/" mapping="/images/**"/>
+	 <!--  以下範例  -->
+    <!-- <mvc:view-controller path="/" view-name="redirect:UsersLogin.jsp"/> -->
+<!--     <mvc:view-controller path="/" view-name="redirect:profilesTransfer.do"/> -->
+
+	<bean id="sqlserverdataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+       <property name="jndiName" value="java:comp/env/jndiJdbcConnSQLServer/OrderSystem"/>
+    </bean>
+    
+    <!-- 創建sessionFactory的映射關係  原則上放在-->
+    <bean id="sessionFactory" destroy-method="destroy" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+       <property name="dataSource" ref="sqlserverdataSource"/>
+       <property name="packagesToScan" value="tw.pet"/>
+       <property name="hibernateProperties">
+          <props>
+             <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+             <prop key="hibernate.show_sql">true</prop>
+             <prop key="hibernate.format_sql">true</prop>
+             <prop key="hibernate.current_session_context_class">thread</prop>
+          </props>
+       </property>
+      </bean>
+      <!-- 開啟交易功能的映射，來源是由sessionFactory取得當前的 session連線-->
+      <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+       <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+</beans>

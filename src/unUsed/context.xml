@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+<Resource 
+	    name="testJNDI"
+		type="javax.sql.DataSource" 
+		auth="Container" username="scott"
+		password="tiger"
+		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+		url="jdbc:sqlserver://localhost:1433;databaseName=PETDB" />
+</Context>
