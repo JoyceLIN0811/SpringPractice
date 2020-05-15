@@ -44,7 +44,7 @@
 				<div class="col s12">
 					<blockquote class="flow-text left">修改文章</blockquote>
 					<blockquote class="flow-text right">
-						<a href="<c:url value='/forum/top.jsp' />" style="color: black">回討論區首頁</a>
+						<a href="<c:url value='forum' />" style="color: black">回討論區首頁</a>
 					</blockquote>
 				</div>
 			</header>

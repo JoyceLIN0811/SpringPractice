@@ -123,7 +123,7 @@ public class OrderDao_impl {
 		return count;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") //使用 @SuppressWarnings 來排除警告
 	public List<OrderBean> getAllOrderJson()  {
 		List<OrderBean> list = new ArrayList<>();
 		String hql = "FROM OrderBean";

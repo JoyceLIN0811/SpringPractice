@@ -3,10 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout/offline">
 <head>
 <title>Register</title>
 <link
@@ -32,8 +28,8 @@
 				</div>
 			</header>
 			<section>
-<%-- 				<form:form modelAttribute="member" method="POST" action="<c:url value='registerInsert'/>" > --%>
-				<form:form modelAttribute="member" method="POST" action="registerInsert">
+				<form modelAttribute="member" method="POST" action="<c:url value='registerInsert'/>" >
+<%-- 				<form:form modelAttribute="member" method="POST" action="registerInsert"> --%>
 					<div class="row">
 						<div class="col s12">
 							<label> *電子信箱(即為您的登入帳號): <input type="text"
@@ -100,7 +96,7 @@
 								type="submit" name="register">註冊</button>
 						</div>
 					</div>
-				</form:form>
+				</form>
 			</section>
 		</article>
 	</main>

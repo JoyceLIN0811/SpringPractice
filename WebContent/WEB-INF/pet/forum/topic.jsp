@@ -24,8 +24,15 @@
 						<c:out value="${topic_content.title}">文章標題</c:out>
 					</blockquote>
 					<blockquote class="flow-text right">
-						<a href="<c:url value='/forum/topiclist.do' />"
-							style="color: black">回文章列表</a>
+						<c:choose>
+							<c:when test="${isFromAllList}">
+								<a href="<c:url value='topiclist' />" style="color: black">回文章列表</a>
+							</c:when>
+							<c:otherwise>
+								<a href="<c:url value='topiclist?categoryId=${topic_content.categoryId}' />" style="color: black">回文章列表</a>
+							</c:otherwise>
+						</c:choose>
+
 					</blockquote>
 				</div>
 			</header>
@@ -38,7 +45,7 @@
 					<p class="left">
 						發布時間:
 						<fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm"
-							value="${topic_content.postTime}" />
+							value="${topic.postTime}" />
 					</p>
 				</div>
 			</section>
@@ -66,9 +73,9 @@
 					<div class="col s12"
 						style="margin: 3% 0 3%; padding: 2%; border-top-right-radius: 10px; border-bottom-right-radius: 10px; background: linear-gradient(to right, #e7e4e4, #f3f2f2); background: -webkit-linear-gradient(left, #e7e4e4, #f3f2f2); background: -o-linear-gradient(right, #e7e4e4, #f3f2f2); background: -moz-linear-gradient(right, #e7e4e4, #f3f2f2);">
 						<span class="chip left" style="background-color: #f3f2f2"><c:out
-								value="${aReplyBean.username}"></c:out></span> <span class="right">回覆時間:
+								value="${reply.username}"></c:out></span> <span class="right">回覆時間:
 							<fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm"
-								value="${aReplyBean.replyTime}" />
+								value="${reply_content.replyTime}" />
 						</span>
 						<div class="row">
 							<p class="col s12"
@@ -86,7 +93,7 @@
 				</div>
 			</header>
 			<section>
-				<form action="<c:url value='/forum/addreply.do'/>" method="post">
+				<form action="<c:url value='addreply'/>" method="post">
 					<div class="row">
 						<div class="col s12">
 							<label>Content: <textarea name="replyContent"
@@ -95,9 +102,9 @@
 							</label>
 						</div>
 					</div>
-					<input type="hidden" name="replyTime" value="${reply.getReplytime()}" />
-					<input type="hidden" name="topicId" value="${param.topicId }" />
-					<input type="hidden" name="username" value="${reply.getUsername()}" />
+					<%-- 					<input type="hidden" name="replyTime" value="${reply.getReplytime()}" /> --%>
+					<input type="hidden" name="topicId" value="${param.topicId }" /> <input
+						type="hidden" name="username" value="${reply.getUsername()}" />
 					<div class="row">
 						<div class="col s12 center">
 							<button class="btn waves-effect waves-light btn-large"

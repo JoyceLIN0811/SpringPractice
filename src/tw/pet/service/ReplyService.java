@@ -31,8 +31,8 @@ public Reply saveReply(Reply rb) {
 		return rDao.queryReply(replyId);
 	}
 	
-	public List<ReplylistView> queryAllReply(){
-		return rDao.queryAllReply();
+	public List<ReplylistView> queryAllReply(int topicId){
+		return rDao.queryAllReply(topicId);
 	}
 	
 	public long AllReplyCounts(int topicId){

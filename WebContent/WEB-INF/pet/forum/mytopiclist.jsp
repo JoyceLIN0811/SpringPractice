@@ -20,7 +20,7 @@
 		<article class="container" style="padding: 3% 0 2%;">
 			<header class="row">
 				<blockquote class="flow-text left">
-					<a href="<c:url value='/forum/top.jsp' />" style="color: black">回討論區首頁</a>
+					<a href="<c:url value='forum' />" style="color: black">回討論區首頁</a>
 				</blockquote>
 				<blockquote class="flow-text right" style="color: black">
 					我的文章數量：
@@ -51,7 +51,7 @@
 											value="${aMyTopicBean.postTime}" /></td>
 									<td class="btn btn-floating pulse"><i
 										class="material-icons"> <a
-											href="<c:url value='/forum/mytopic.do?topicId=${aMyTopicBean.topicId}' />"
+											href="<c:url value='mytopic?topicId=${aMyTopicBean.topicId}' />"
 											style="color: white">arrow_forward</a></i></td>
 								</tr>
 							</c:forEach>

@@ -54,7 +54,7 @@ public class ProductDao_impl implements ProductDao {
 	public List<ProductBean> selectSales(){
 		String hql ="from ProductBean order by sales desc";
 		Query<ProductBean> selectSales= getSession().createQuery(hql,ProductBean.class);
-		
+		 
 		return selectSales.list();
 	}
 	

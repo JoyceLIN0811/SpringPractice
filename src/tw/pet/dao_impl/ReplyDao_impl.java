@@ -3,7 +3,10 @@ package tw.pet.dao_impl;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import tw.pet.dao.ReplyDao;
@@ -12,23 +15,23 @@ import tw.pet.model.ReplylistView;
 @Repository
 public class ReplyDao_impl implements ReplyDao {
 	
-	private Session session;
+	@Autowired
+	@Qualifier(value = "sessionFactory")
+	private SessionFactory sessionFactory;
+	
 
 	public ReplyDao_impl() {
 	}
-	
-	public ReplyDao_impl(Session session) {
-		this.session = session;
-	}
-	
+
 	public Session getSession() {
+		Session session = sessionFactory.getCurrentSession();
 		return session;
 	}
 
 	@Override
 	public Reply saveReply(Reply rb) {
 		getSession().save(rb);
-		return null;
+		return rb;
 	}
 
 	@Override
@@ -60,16 +63,17 @@ public class ReplyDao_impl implements ReplyDao {
 	}
 
 	@Override
-	public List<ReplylistView> queryAllReply() {
-		Query<ReplylistView> query = getSession().createQuery("FROM ReplylistView", ReplylistView.class);
+	public List<ReplylistView> queryAllReply(int topicId) {
+		Query<ReplylistView> query = getSession().createQuery("FROM ReplylistView WHERE topicId=:topicId ORDER BY replyTime DESC", ReplylistView.class);
+		query.setParameter("topicId", topicId);
 		List<ReplylistView> list = query.list();
 		return list;
 	}
 
 	@Override
 	public long AllReplyCounts(int topicId) {
-		Query query = getSession().createQuery("SELECT COUNT(*) FROM ReplylistView WHERE topicId=?1");
-		query.setParameter(1, topicId);
+		Query query = getSession().createQuery("SELECT COUNT(*) FROM ReplylistView WHERE topicId=:topicId");
+		query.setParameter("topicId", topicId);
 		long count = (long)query.uniqueResult();
 		return count;
 	}

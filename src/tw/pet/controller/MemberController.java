@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.pet.model.PetMembers;
 import tw.pet.service.MemberService;
 
 @Controller
-//@SessionAttributes(value={"member"})
+@SessionAttributes(value={"petMembers"})
 public class MemberController {
 
 	@Autowired
@@ -28,7 +29,7 @@ public class MemberController {
 
 		@RequestMapping(value = "/register", method = RequestMethod.GET)
 		public String processTransferAction() {
-			return "Member/register";
+			return "Member/memberRegister";
 		}
 
 		@RequestMapping(value = "/registerInsert", method = RequestMethod.POST, consumes = "application/x-www-form-urlencoded")
@@ -37,7 +38,7 @@ public class MemberController {
 			if (n != null) {
 				return "../../index";
 			} else {
-				return "Member/register";
+				return "Member/memberRegister";
 			}
 		}
 		
@@ -48,11 +49,6 @@ public class MemberController {
 		
 		@RequestMapping(path = "/loginCheck", method = RequestMethod.POST)
 		public String loginCheck(@RequestParam("email") String email, @RequestParam("password") String password, Model m,  HttpServletRequest req) {
-//				PetMembers member = new PetMembers();
-//				Integer memberId = null;
-//				member.setMemberId(memberId);
-				
-//		    m.addAttribute("member", );
 
 			Map<String, String> errors = new HashMap<String, String>();	
 
@@ -75,16 +71,16 @@ public class MemberController {
 			m.addAttribute("email", email);
 			m.addAttribute("password", password);
 			
-			HttpSession rsession = req.getSession();
-			rsession.setAttribute("petMembers", result);
+//			HttpSession rsession = req.getSession();
+//			rsession.setAttribute("petMembers", result);
 			
 			if(result != null) {
+				m.addAttribute("petMembers", result);
 				return "../../index";
 			}
 			
 			errors.put("msg", "Please Input Correct username or password");
-			return "Member/login";
+			return "Member/memberLogin";
 		}
-
-
+		
 	}

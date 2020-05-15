@@ -54,7 +54,7 @@
 											value="${aTopicBean.postTime}" /></td>
 									<td class="btn btn-floating pulse"><i
 										class="material-icons"> <a
-											href="<c:url value='topic?topicId=${aTopicBean.topicId}' />"
+											href="<c:url value='topic?topicId=${aTopicBean.topicId}&categoryId=${categoryId}' />"
 											style="color: white">arrow_forward</a></i></td>
 								</tr>
 							</c:forEach>

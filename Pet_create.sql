@@ -2,7 +2,7 @@ USE [PETDB]
 GO
 
 
-/**·|­ûªí³æ1**/
+/**ï¿½|ï¿½ï¿½ï¿½ï¿½ï¿½1**/
 
 CREATE TABLE [dbo].[PetMembers](
 	[memberId][int] IDENTITY(1,1) NOT NULL,
@@ -26,7 +26,7 @@ GO
 
 
 
-/**°Q½×°Ïªí³æ2-4**/
+/**ï¿½Qï¿½×°Ïªï¿½ï¿½2-4**/
 
 CREATE TABLE [dbo].[Topic](
 	[topicId] [int] IDENTITY(1,1) NOT NULL,
@@ -52,12 +52,12 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY])
 GO
 
-  insert into menu (category) values ('¥Í¬¡')
-    insert into menu (category) values ('¸ê°T')
-	  insert into menu (category) values ('·s»D')
-	    insert into menu (category) values ('µo°Ý')
-		  insert into menu (category) values ('»{¾i')
-		    insert into menu (category) values ('¨ä¥L')
+  insert into menu (category) values ('ï¿½Í¬ï¿½')
+    insert into menu (category) values ('ï¿½ï¿½T')
+	  insert into menu (category) values ('ï¿½sï¿½D')
+	    insert into menu (category) values ('ï¿½oï¿½ï¿½')
+		  insert into menu (category) values ('ï¿½{ï¿½i')
+		    insert into menu (category) values ('ï¿½ï¿½L')
 
 			GO
 
@@ -100,7 +100,7 @@ LEFT JOIN PetMembers p
 ON t.username = p.username
 
 
-/**¹w¬ù¨t²Îªí³æ5-8**/
+/**ï¿½wï¿½ï¿½ï¿½tï¿½Îªï¿½ï¿½5-8**/
 
 CREATE TABLE [dbo].[Service Item](
 	[itemId] [int] IDENTITY(1,1) NOT NULL,
@@ -145,7 +145,7 @@ CREATE TABLE [dbo].[Evaluation](
 ) ON [PRIMARY]
 GO
 
-/**¶Ò¸ê¥­¥xªí³æ9-11**/
+/**ï¿½Ò¸ê¥­ï¿½xï¿½ï¿½ï¿½9-11**/
 CREATE TABLE Post (
 	[postId] [int] IDENTITY(1,1) NOT NULL,
   [img] [varbinary](MAX),
@@ -172,9 +172,9 @@ PRIMARY KEY CLUSTERED
 	[categoryId] ASC
 ) ON [PRIMARY])
 GO
-  insert into FoundCategory(categoryName) values ('ª÷ÃB')
-    insert into FoundCategory (categoryName) values ('ª«¸ê')
-	  insert into FoundCategory(categoryName) values ('³]­p')
+  insert into FoundCategory(categoryName) values ('ï¿½ï¿½ï¿½B')
+    insert into FoundCategory (categoryName) values ('ï¿½ï¿½ï¿½ï¿½')
+	  insert into FoundCategory(categoryName) values ('ï¿½]ï¿½p')
 
 CREATE TABLE Sponsor (
 [sponsorId] [int] IDENTITY(1,1) NOT NULL,
@@ -190,23 +190,27 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY])
 GO
 
-/**°Ó«°ªí³æ12-15**/
+/**ï¿½Ó«ï¿½ï¿½ï¿½ï¿½12-15**/
 
-CREATE TABLE [dbo].[Pet](
-	[petId] [int] IDENTITY(1,1) NOT NULL,
+CREATE TABLE [dbo].[Product](
+	[productId] [int] IDENTITY(1,1) NOT NULL,
 	[name] [nvarchar](100) NULL,
 	[price] [money] NULL,
 	[discount] [money] NULL,
 	[coverImage] [image] NULL,
-	[fileName] [varchar](255) NULL,
+	[fileName] [nvarchar](255) NULL,
 	[description] [nvarchar](255) NULL,
-	[category_id] [varchar](40) NULL,
+	[categoryId] [nvarchar](255) NULL,
 	[amount] [int] NULL,
-	PRIMARY KEY CLUSTERED 
+	[sales] [int] NULL,
+	[status] [int] NULL,
+ CONSTRAINT [PK__Pet__DDF850795C1234E2] PRIMARY KEY CLUSTERED 
 (
-   [petId] ASC
-) ON [PRIMARY])
+	[productId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
+
 
 
 CREATE TABLE [dbo].[Category](
@@ -215,8 +219,9 @@ CREATE TABLE [dbo].[Category](
 	[cateDescription] [varchar](255) NULL,
 PRIMARY KEY CLUSTERED 
 (
-   [cateId] ASC
-) ON [PRIMARY])
+	[cateId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Orderdetail](
@@ -227,23 +232,24 @@ CREATE TABLE [dbo].[Orderdetail](
 	[amount] [int] NULL,
 	[unitPrice] [decimal](18, 1) NULL,
 	[discount] [money] NULL,
-	PRIMARY KEY CLUSTERED 
+PRIMARY KEY CLUSTERED 
 (
-   [seqno] ASC
-) ON [PRIMARY])
+	[seqno] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Orders](
-	[orderNo] [int] IDENTITY(1,1) NOT NULL,
-	[memberId] [varchar](20) NULL,
-	[totalAmount] [decimal](11, 1) NULL,
-	[shippingAddress] [varchar](64) NULL,
-	[orderDate] [datetime] NULL,
-	[shippingDate] [datetime] NULL,
-	[cancelTag] [char](1) NULL,
-		PRIMARY KEY CLUSTERED 
+	[orderId] [int] IDENTITY(1,1) NOT NULL,
+	[memberId] [int] NULL,
+	[totalAmount] [int] NULL,
+	[shippingAddress] [nvarchar](255) NULL,
+	[orderDate] [nvarchar](255) NULL,
+	[state] [nvarchar](255) NULL,
+ CONSTRAINT [PK__Orders__0809CA8659ED0369] PRIMARY KEY CLUSTERED 
 (
-   [orderNo] ASC
-) ON [PRIMARY])
+	[orderId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 GO
 

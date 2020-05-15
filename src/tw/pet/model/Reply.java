@@ -72,6 +72,7 @@ public class Reply {
 
 	@Column(name = "replyTime")
 	public Timestamp getReplyTime() {
+		Timestamp replyTime = new java.sql.Timestamp(System.currentTimeMillis());
 		return replyTime;
 	}
 

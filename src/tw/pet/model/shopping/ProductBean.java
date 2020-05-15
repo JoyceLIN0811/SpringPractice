@@ -3,6 +3,7 @@ package tw.pet.model.shopping;
 
 
 import java.sql.Blob;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -35,6 +37,8 @@ public class ProductBean {
 	private Integer status;
 	private  String biPhoto;
 	private String  priceStr = null;
+	private MultipartFile productImage;
+	private Timestamp admissionTime;
 	
 
 	//放入商品的資料裡面 不要放置
@@ -165,6 +169,21 @@ public class ProductBean {
 	}
 	public void setPriceStr(String priceStr) {
 		this.priceStr = priceStr;
+	}
+	@Transient
+	public MultipartFile getProductImage() {
+		return productImage;
+	}
+	public void setProductImage(MultipartFile productImage) {
+		this.productImage = productImage;
+	}
+	
+	@Column(name="admissionTime")
+	public Timestamp getAdmissionTime() {
+		return admissionTime;
+	}
+	public void setAdmissionTime(Timestamp admissionTime) {
+		this.admissionTime = admissionTime;
 	}
 	
 	

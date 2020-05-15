@@ -15,7 +15,7 @@ public interface ReplyDao {
 	
 	public Reply queryReply(int replyId);
 	
-	public List<ReplylistView> queryAllReply();
+	public List<ReplylistView> queryAllReply(int topicId);
 	
 	public long AllReplyCounts(int topicId);
 	
