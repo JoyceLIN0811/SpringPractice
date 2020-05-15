@@ -87,7 +87,7 @@ public class Topic {
 
 	@Column(name ="postTime")
 	public Timestamp getPostTime() {
-		Timestamp postTime = new java.sql.Timestamp(System.currentTimeMillis());
+//		Timestamp postTime = new java.sql.Timestamp(System.currentTimeMillis());
 		return postTime;
 	}
 

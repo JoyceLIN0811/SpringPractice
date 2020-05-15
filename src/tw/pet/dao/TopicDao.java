@@ -17,7 +17,7 @@ public interface TopicDao {
 	
 	public List<TopiclistView> queryAllTopic();
 	
-	public List<TopiclistView> queryCategoryTpic(int categoryId);
+	public List<TopiclistView> queryCategoryTopic(int categoryId);
 	
 	public List<TopiclistView> queryMyTopic(int memberId);
 	

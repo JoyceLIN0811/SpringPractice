@@ -71,7 +71,7 @@ public class TopicDao_impl implements TopicDao {
 	}
 
 	@Override
-	public List<TopiclistView> queryCategoryTpic(int categoryId) {
+	public List<TopiclistView> queryCategoryTopic(int categoryId) {
 		Query<TopiclistView> query = getSession().createQuery("from TopiclistView where categoryId=:categoryId ORDER BY postTime DESC", TopiclistView.class);
 		query.setParameter("categoryId", categoryId);
 		List<TopiclistView> list = query.getResultList();

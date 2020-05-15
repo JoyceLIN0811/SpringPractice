@@ -2,7 +2,7 @@ USE [PETDB]
 GO
 
 
-/**ï¿½|ï¿½ï¿½ï¿½ï¿½ï¿½1**/
+/**·|­ûªí³æ1**/
 
 CREATE TABLE [dbo].[PetMembers](
 	[memberId][int] IDENTITY(1,1) NOT NULL,
@@ -11,13 +11,7 @@ CREATE TABLE [dbo].[PetMembers](
 	[username] [nvarchar](20) NULL,
 	[gender] [char](10) NULL,
 	[age] [int] NULL,
-	[bday] [date] NULL,
-	[address] [nvarchar](64) NULL,
-	[phone] [varchar](15) NULL,
-	[petType] [nvarchar](10) NULL,
-	[memberImage] [image] NULL,
-	[fileName] [nvarchar](20) NULL,
-	[registerTime] [datetime] NULL,
+
 	PRIMARY KEY CLUSTERED 
 (
 	[memberId] ASC
@@ -26,7 +20,7 @@ GO
 
 
 
-/**ï¿½Qï¿½×°Ïªï¿½ï¿½2-4**/
+/**°Q½×°Ïªí³æ2-4**/
 
 CREATE TABLE [dbo].[Topic](
 	[topicId] [int] IDENTITY(1,1) NOT NULL,
@@ -52,12 +46,12 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY])
 GO
 
-  insert into menu (category) values ('ï¿½Í¬ï¿½')
-    insert into menu (category) values ('ï¿½ï¿½T')
-	  insert into menu (category) values ('ï¿½sï¿½D')
-	    insert into menu (category) values ('ï¿½oï¿½ï¿½')
-		  insert into menu (category) values ('ï¿½{ï¿½i')
-		    insert into menu (category) values ('ï¿½ï¿½L')
+  insert into menu (category) values ('¥Í¬¡')
+    insert into menu (category) values ('¸ê°T')
+	  insert into menu (category) values ('·s»D')
+	    insert into menu (category) values ('µo°Ý')
+		  insert into menu (category) values ('»{¾i')
+		    insert into menu (category) values ('¨ä¥L')
 
 			GO
 
@@ -92,15 +86,28 @@ ON t.topicId = r.topicId
 
 Create view replylistView
 as
-SELECT   p.memberId, t.username, t.topicId, t.title, r.replyId, r.replyContent, r.replyTime
+SELECT   p.memberId, r.username, t.topicId, t.title, r.replyId, r.replyContent, r.replyTime
 FROM Reply r
 LEFT JOIN Topic t
 ON t.topicId =  r.topicId
 LEFT JOIN PetMembers p
-ON t.username = p.username
+ON r.username = p.username
+
+Drop table Post
 
 
-/**ï¿½wï¿½ï¿½ï¿½tï¿½Îªï¿½ï¿½5-8**/
+/**¶Ò¸ê¥­¥xªí³æ**/
+
+CREATE TABLE Post (
+  postno INT IDENTITY PRIMARY KEY,
+  postname  nvarchar(30),
+  name nvarchar(10),
+  content nvarchar(max),
+  expdate varchar(30),
+  amount int
+);
+
+/**¹w¬ù¨t²Îªí³æ5-8**/
 
 CREATE TABLE [dbo].[Service Item](
 	[itemId] [int] IDENTITY(1,1) NOT NULL,
@@ -145,72 +152,24 @@ CREATE TABLE [dbo].[Evaluation](
 ) ON [PRIMARY]
 GO
 
-/**ï¿½Ò¸ê¥­ï¿½xï¿½ï¿½ï¿½9-11**/
-CREATE TABLE Post (
-	[postId] [int] IDENTITY(1,1) NOT NULL,
-  [img] [varbinary](MAX),
-  [categoryId] [int],
-  [title] [nvarchar](50),
-  [username] [nvarchar](20),
-  [content] [nvarchar](max),
-  [today] [date],
-  [expdate] [date],
-  [amount] [int],
-  [total] [int],
-  [supplies] [nvarchar](30),
-PRIMARY KEY CLUSTERED 
-(
-	[postId] ASC
-) ON [PRIMARY])
-GO
 
-CREATE TABLE FoundCategory (
-	[categoryId] [int] IDENTITY(1,1) NOT NULL,
-  [categoryName] [nchar](10),
-PRIMARY KEY CLUSTERED 
-(
-	[categoryId] ASC
-) ON [PRIMARY])
-GO
-  insert into FoundCategory(categoryName) values ('ï¿½ï¿½ï¿½B')
-    insert into FoundCategory (categoryName) values ('ï¿½ï¿½ï¿½ï¿½')
-	  insert into FoundCategory(categoryName) values ('ï¿½]ï¿½p')
+/**°Ó«°ªí³æ12-15**/
 
-CREATE TABLE Sponsor (
-[sponsorId] [int] IDENTITY(1,1) NOT NULL,
-[username] [nvarchar](20),
-[phone][int],
-[address][nvarchar](30),
-[today][date],
-[totalAmount] [int],
-[supplies][nvarchar](30),
-PRIMARY KEY CLUSTERED 
-(
-   [sponsorId] ASC
-) ON [PRIMARY])
-GO
-
-/**ï¿½Ó«ï¿½ï¿½ï¿½ï¿½12-15**/
-
-CREATE TABLE [dbo].[Product](
-	[productId] [int] IDENTITY(1,1) NOT NULL,
+CREATE TABLE [dbo].[Pet](
+	[petId] [int] IDENTITY(1,1) NOT NULL,
 	[name] [nvarchar](100) NULL,
 	[price] [money] NULL,
 	[discount] [money] NULL,
 	[coverImage] [image] NULL,
-	[fileName] [nvarchar](255) NULL,
+	[fileName] [varchar](255) NULL,
 	[description] [nvarchar](255) NULL,
-	[categoryId] [nvarchar](255) NULL,
+	[category_id] [varchar](40) NULL,
 	[amount] [int] NULL,
-	[sales] [int] NULL,
-	[status] [int] NULL,
- CONSTRAINT [PK__Pet__DDF850795C1234E2] PRIMARY KEY CLUSTERED 
+	PRIMARY KEY CLUSTERED 
 (
-	[productId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+   [petId] ASC
+) ON [PRIMARY])
 GO
-
 
 
 CREATE TABLE [dbo].[Category](
@@ -219,9 +178,8 @@ CREATE TABLE [dbo].[Category](
 	[cateDescription] [varchar](255) NULL,
 PRIMARY KEY CLUSTERED 
 (
-	[cateId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+   [cateId] ASC
+) ON [PRIMARY])
 GO
 
 CREATE TABLE [dbo].[Orderdetail](
@@ -232,24 +190,23 @@ CREATE TABLE [dbo].[Orderdetail](
 	[amount] [int] NULL,
 	[unitPrice] [decimal](18, 1) NULL,
 	[discount] [money] NULL,
-PRIMARY KEY CLUSTERED 
+	PRIMARY KEY CLUSTERED 
 (
-	[seqno] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+   [seqno] ASC
+) ON [PRIMARY])
 GO
 
 CREATE TABLE [dbo].[Orders](
-	[orderId] [int] IDENTITY(1,1) NOT NULL,
-	[memberId] [int] NULL,
-	[totalAmount] [int] NULL,
-	[shippingAddress] [nvarchar](255) NULL,
-	[orderDate] [nvarchar](255) NULL,
-	[state] [nvarchar](255) NULL,
- CONSTRAINT [PK__Orders__0809CA8659ED0369] PRIMARY KEY CLUSTERED 
+	[orderNo] [int] IDENTITY(1,1) NOT NULL,
+	[memberId] [varchar](20) NULL,
+	[totalAmount] [decimal](11, 1) NULL,
+	[shippingAddress] [varchar](64) NULL,
+	[orderDate] [datetime] NULL,
+	[shippingDate] [datetime] NULL,
+	[cancelTag] [char](1) NULL,
+		PRIMARY KEY CLUSTERED 
 (
-	[orderId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+   [orderNo] ASC
+) ON [PRIMARY])
 GO
 

@@ -3,10 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout/online">
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
 	rel="stylesheet" type="text/css" />
@@ -45,7 +41,7 @@
 					<p class="left">
 						發布時間:
 						<fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm"
-							value="${topic.postTime}" />
+							value="${topic_content.postTime}" />
 					</p>
 				</div>
 			</section>
@@ -73,9 +69,9 @@
 					<div class="col s12"
 						style="margin: 3% 0 3%; padding: 2%; border-top-right-radius: 10px; border-bottom-right-radius: 10px; background: linear-gradient(to right, #e7e4e4, #f3f2f2); background: -webkit-linear-gradient(left, #e7e4e4, #f3f2f2); background: -o-linear-gradient(right, #e7e4e4, #f3f2f2); background: -moz-linear-gradient(right, #e7e4e4, #f3f2f2);">
 						<span class="chip left" style="background-color: #f3f2f2"><c:out
-								value="${reply.username}"></c:out></span> <span class="right">回覆時間:
+								value="${aReplyBean.username}"></c:out></span> <span class="right">回覆時間:
 							<fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm"
-								value="${reply_content.replyTime}" />
+								value="${aReplyBean.replyTime}" />
 						</span>
 						<div class="row">
 							<p class="col s12"
@@ -93,7 +89,7 @@
 				</div>
 			</header>
 			<section>
-				<form action="<c:url value='addreply'/>" method="post">
+				<form action="<c:url value='addreply?categoryId=${categoryId}'/>" method="post">
 					<div class="row">
 						<div class="col s12">
 							<label>Content: <textarea name="replyContent"

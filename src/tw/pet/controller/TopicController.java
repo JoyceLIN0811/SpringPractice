@@ -67,7 +67,7 @@ public class TopicController {
 				throw new ServletException(e);
 			}
 			
-			List<TopiclistView> clist = ts.queryCategoryTpic(categoryIds);
+			List<TopiclistView> clist = ts.queryCategoryTopic(categoryIds);
 			m.addAttribute("title_list", clist);
 
 			long cnum = ts.CategoryTopicCounts(categoryIds);
@@ -91,11 +91,12 @@ public class TopicController {
 		topic.setCategoryId(Integer.parseInt(categoryId));
 		topic.setContent(content);
 		topic.setTitle(title);
-		java.sql.Timestamp postTime = null;
+		java.sql.Timestamp postTime = new java.sql.Timestamp(System.currentTimeMillis());
 		topic.setPostTime(postTime);
 		topic.setUsername(petMembers.getUsername());
 
 		Topic n = ts.saveTopic(topic);
+//		m.addAttribute("topic", n);
 		if (n != null) {
 			return "redirect:/topiclist";
 		} else {
@@ -105,9 +106,6 @@ public class TopicController {
 	
 	@RequestMapping(path = "/topic", method = RequestMethod.GET)
 	public String showtopic(@SessionAttribute("petMembers") PetMembers petMembers, @RequestParam(name = "topicId") String topicId, @RequestParam(name = "categoryId") String categoryId,Model m) {
-//		Topic topic = new Topic();
-//		topic.setTopicId(Integer.parseInt(topicId));
-//		topic.setUsername(petMembers.getUsername());
 		
 		Topic pagecontent = ts.queryTopic(Integer.parseInt(topicId));
 
@@ -122,9 +120,9 @@ public class TopicController {
 		
 		m.addAttribute("isFromAllList", (StringUtils.isEmpty(categoryId)));
 		m.addAttribute("categoryId",categoryId);
-		m.addAttribute("topic", pagecontent);
-
-		System.out.println("reply_name2="+rpage);
+//		m.addAttribute("topic", pagecontent);
+		System.out.println("pagecontent="+pagecontent.getPostTime());
+//		System.out.println("reply_time"+rpage.get(1).getReplyTime());
 		System.out.println("reply_name"+petMembers.getUsername());
 		System.out.println("categoryId="+categoryId);
 		System.out.println(StringUtils.isEmpty(categoryId));

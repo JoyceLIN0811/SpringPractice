@@ -34,8 +34,8 @@ public class TopicService {
 		return tDao.queryAllTopic();
 	}
 
-	public List<TopiclistView> queryCategoryTpic(int categoryId) {
-		return tDao.queryCategoryTpic(categoryId);
+	public List<TopiclistView> queryCategoryTopic(int categoryId) {
+		return tDao.queryCategoryTopic(categoryId);
 	}
 
 	public List<TopiclistView> queryMyTopic(int memberId) {

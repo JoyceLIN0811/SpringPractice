@@ -30,18 +30,20 @@ public class ReplyController {
 	private ReplyService rs;
 	
 	@RequestMapping(value = "/addreply", method = RequestMethod.POST)
-	public String saveReply(@SessionAttribute("petMembers") PetMembers petMembers, @SessionAttribute("topic") Topic topic, @RequestParam("replyContent") String replyContent, @RequestParam("topicId") String topicId,
-			@RequestParam("username") String username, Model m) {
+	public String saveReply(@SessionAttribute("petMembers") PetMembers petMembers, @RequestParam("replyContent") String replyContent, @RequestParam("topicId") String topicId,
+			@RequestParam("username") String username, @RequestParam(name = "categoryId") String categoryId, Model m) {
 		Reply reply = new Reply();
+		Topic topic = new Topic();
 
 		reply.setReplyContent(replyContent);
 		reply.setTopicId(Integer.parseInt(topicId));
-		java.sql.Timestamp replyTime = null;
+		java.sql.Timestamp replyTime = new java.sql.Timestamp(System.currentTimeMillis());
 		reply.setReplyTime(replyTime);
 		reply.setUsername(petMembers.getUsername());
 		System.out.println("reply_name=" + petMembers.getUsername());
-
-		m.addAttribute("categoryId",topic.getCategoryId());
+		System.out.println("reply_time=" + replyTime);
+		System.out.println("categoryId="+categoryId);
+		m.addAttribute("categoryId",categoryId);
 		Reply r = rs.saveReply(reply);
 		m.addAttribute("reply", r);
 		return "redirect:/topic?topicId="+topicId;

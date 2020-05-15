@@ -17,7 +17,7 @@
 <script type="text/javascript">
 	function confirmDelete() {
 		if (confirm("確定刪除此文章 ? ")) {
-			document.forms[0].action = "update_delete_topic.do?topicId=${mytopic_content.topicId}&action=delete";
+			document.forms[0].action = "update_delete_topic?topicId=${mytopic_content.topicId}&action=delete";
 			document.forms[0].method = "POST";
 			document.forms[0].submit();
 		} else {
@@ -27,7 +27,7 @@
 
 	function UpdateTopic() {
 		if (confirm("確定修改此文章 ? ")) {
-			document.forms[0].action = "update_delete_topic.do?topicId=${mytopic_content.topicId}&action=update";
+			document.forms[0].action = "update_delete_topic?topicId=${mytopic_content.topicId}&action=update";
 			document.forms[0].method = "POST";
 			document.forms[0].submit();
 		} else {
@@ -53,7 +53,7 @@
 				<c:set var="title" value='${mytopic_content.title}' />
 				<c:set var="categoryId" value='${mytopic_content.categoryId}' />
 				<c:set var="content" value='${mytopic_content.content}' />
-				<form action="<c:url value='update_delete_topic.do'/>"
+				<form action="<c:url value='update_delete_topic'/>"
 					method="post">
 
 					<div class="row">
