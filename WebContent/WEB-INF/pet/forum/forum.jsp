@@ -39,7 +39,8 @@
 <!-- 					<li><a th:href="@{'/addTopic'}">發表文章</a></li> -->
 					<!-- 					<li><a th:href="@{'/message'}">通知訊息<span class="new badge" -->
 							<%-- 							th:text="${newMessage}"></span></a></li> --%> <!-- 					<li><a th:href="@{'/logout'}">登出</a></li> -->
-							<li><a href="<c:url value='/logout.jsp' />">登出</a></li>
+							<li><a href="<c:url value='logout' />">登出</a></li>
+							<li><a href="<c:url value='/index.jsp' />">首頁</a></li>
 				</ul>
 			</div>
 		</div>

@@ -17,7 +17,7 @@ public class MemberDao_impl {
 	@Qualifier(value = "sessionFactory")
 	private SessionFactory sessionFactory;
 
-//	private Session session;
+	private Session session;
 
 //	public MemberDao_impl(Session session) {
 //		this.session = sessionFactory.getCurrentSession();
@@ -33,6 +33,7 @@ public class MemberDao_impl {
 	}
 
 	public PetMembers saveMember(PetMembers mb) {
+	
 		Query<PetMembers> query = getSession().createQuery("From PetMembers WHERE email=:email", PetMembers.class);
 		query.setParameter("email", mb.getEmail());
 		PetMembers bean = (PetMembers) query.uniqueResult();

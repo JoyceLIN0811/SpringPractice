@@ -47,7 +47,7 @@ public class MyTopicController {
 	
 		Topic content = ts.queryTopic(Integer.parseInt(topicId));
 		m.addAttribute("mytopic_content", content);
-		
+
 		return "forum/update_delete_topic";
 
 	}
@@ -55,11 +55,6 @@ public class MyTopicController {
 	@RequestMapping(value = "/update_delete_topic", method= RequestMethod.POST)
 	public String updateMyTopic(@RequestParam(name = "content") String content,@RequestParam(name = "title") String title,@RequestParam(name = "categoryId") String categoryId,@RequestParam(name = "topicId") String topicId, @RequestParam(name = "action") String action) {
 		Topic topic = new Topic();
-//		System.out.println("action="+action);
-//		System.out.println("topicId="+topicId);
-//		System.out.println("categoryId="+categoryId);
-//		System.out.println("title="+title);
-//		System.out.println("content="+content);
 
 		if ("delete".equals(action)) {
 			ts.deleteTopic(Integer.parseInt(topicId));

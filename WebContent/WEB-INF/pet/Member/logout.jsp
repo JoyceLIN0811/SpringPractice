@@ -35,10 +35,10 @@
 				</ul>
 
 				<ul id="nav-left" class="right hide-on-med-and-down">
-				<li><a href="<c:url value='/forum/top.jsp' />">討論區</a></li>
+				<li><a href="<c:url value='forum' />">討論區</a></li>
 				<li><a href="<c:url value='/index.jsp' />">首頁</a></li>				
-					<li><a href="<c:url value='/login.jsp' />">登入</a></li>
-					<li><a href="<c:url value='/register.jsp' />">註冊</a></li>
+					<li><a href="<c:url value='login' />">登入</a></li>
+					<li><a href="<c:url value='register' />">註冊</a></li>
 				</ul>
 			</div>
 		</div>

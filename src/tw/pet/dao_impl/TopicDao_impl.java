@@ -52,7 +52,9 @@ public class TopicDao_impl implements TopicDao {
 			bean.setCategoryId(tb.getCategoryId());
 			bean.setTitle(tb.getTitle());
 			bean.setContent(tb.getContent());
+			System.out.println(bean);
 			getSession().update(bean);
+
 		}
 		return bean;
 	}

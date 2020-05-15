@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import tw.pet.dao_impl.TopicDao_impl;
 import tw.pet.model.Topic;
 import tw.pet.model.TopiclistView;
 
 @Service
+@Transactional
 public class TopicService {
 	@Autowired
 	private TopicDao_impl tDao;

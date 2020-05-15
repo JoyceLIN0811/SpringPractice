@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import tw.pet.dao_impl.ReplyDao_impl;
 import tw.pet.model.Reply;
 import tw.pet.model.ReplylistView;
 
 @Service
+@Transactional
 public class ReplyService {
 	
 	@Autowired

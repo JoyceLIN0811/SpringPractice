@@ -28,8 +28,8 @@ public class MemberController {
 	private MemberService ms;
 
 		@RequestMapping(value = "/register", method = RequestMethod.GET)
-		public String processTransferAction() {
-			return "Member/memberRegister";
+		public String processRregister() {
+			return "Member/register";
 		}
 
 		@RequestMapping(value = "/registerInsert", method = RequestMethod.POST, consumes = "application/x-www-form-urlencoded")
@@ -43,7 +43,7 @@ public class MemberController {
 		}
 		
 		@RequestMapping(path = "/login", method = RequestMethod.GET)
-		public String processTransferAction2() {
+		public String processLogin() {
 			return "Member/login";
 		}
 		
@@ -81,6 +81,11 @@ public class MemberController {
 			
 			errors.put("msg", "Please Input Correct username or password");
 			return "Member/memberLogin";
+		}
+		
+		@RequestMapping(path = "/logout", method = RequestMethod.GET)
+		public String processLogout() {
+			return "Member/logout";
 		}
 		
 	}
